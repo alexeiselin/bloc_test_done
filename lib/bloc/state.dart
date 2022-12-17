@@ -10,7 +10,7 @@ abstract class LoginState extends Equatable {
   List<Object?> get props => [error, isLoading];
 }
 class StateIsLoading extends LoginState {
-  const StateIsLoading ({isLoading}) : super (isLoading:true);
+  const StateIsLoading () : super (isLoading:true);
 }
 class PhoneInputState extends LoginState {
   const PhoneInputState({String? error}) : super(error: error);

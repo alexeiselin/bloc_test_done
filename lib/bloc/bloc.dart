@@ -1,4 +1,4 @@
- import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_task/bloc/state.dart';
 import 'package:test_task/repository/repository.dart';
 
