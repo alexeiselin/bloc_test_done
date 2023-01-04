@@ -47,6 +47,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     }
 
-    //TODO: describe logic
+
   }
 

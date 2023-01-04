@@ -36,16 +36,13 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   void initState() {
-    
     pinController.addListener(() {
       if (pinController.text.length == pinLength) {
         onPinEntered();
       }
     });
 
-
     super.initState();
-
   }
 
   @override
@@ -54,27 +51,20 @@ class _LoginFormState extends State<LoginForm> {
     super.dispose();
   }
 
-
-
-  //TODO show errors in any appropriate way (with dialog or as a red color text under the input field or any other way)
-
   void onPhoneSubmitted() {
     BlocProvider.of<LoginBloc>(context)
         .add(PhoneEnteredEvent(phoneController.text));
-    //TODO add action
   }
 
   void onPinEntered() {
     BlocProvider.of<LoginBloc>(context)
         .add(CheckEnteredCode(pinController.text));
     pinController.text = '';
-    //TODO add action
   }
 
   void reenterPhone() {
     BlocProvider.of<LoginBloc>(context).add(ReenterPhoneEvent());
     phoneController.text = '';
-    //TODO add action
   }
 
   @override
@@ -93,15 +83,16 @@ class _LoginFormState extends State<LoginForm> {
           child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
             if (state.error != null) {
               WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text('${state.error}')
-                ));
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text('${state.error}')));
               });
             }
-            //TODO show progress when state.isLoading is true
-            if (state.isLoading == true) {return const Center(
-              child: CircularProgressIndicator(),
-            );}
+
+            if (state.isLoading == true) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
 
             final columnChildren = <Widget>[];
             if (state is PhoneInputState) {
@@ -149,9 +140,11 @@ class _LoginFormState extends State<LoginForm> {
               ]);
             } else {
               columnChildren.add(ElevatedButton(
-                  onPressed: () {BlocProvider.of<LoginBloc>(context)
-                      .add(ReenterPhoneEvent());
-                  phoneController.text = '';},
+                  onPressed: () {
+                    BlocProvider.of<LoginBloc>(context)
+                        .add(ReenterPhoneEvent());
+                    phoneController.text = '';
+                  },
                   child: const Text('Success')));
             }
             return Column(
